@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.1.2](https://www.github.com/googleapis/python-private-catalog/compare/v0.1.1...v0.1.2) (2021-06-19)
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-private-catalog/issues/1127)) ([#8](https://www.github.com/googleapis/python-private-catalog/issues/8)) ([9852586](https://www.github.com/googleapis/python-private-catalog/commit/98525867b5958ce8bf52ff2998ccff4583be14d3)), closes [#1126](https://www.github.com/googleapis/python-private-catalog/issues/1126)
+
 ### [0.1.1](https://www.github.com/googleapis/python-private-catalog/compare/v0.1.0...v0.1.1) (2021-06-16)
 
 
