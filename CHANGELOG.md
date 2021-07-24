@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/googleapis/python-private-catalog/compare/v0.2.1...v0.3.0) (2021-07-24)
+
+
+### Features
+
+* add Samples section to CONTRIBUTING.rst ([#22](https://www.github.com/googleapis/python-private-catalog/issues/22)) ([22243a0](https://www.github.com/googleapis/python-private-catalog/commit/22243a051100f79375772de0f383cdb79d0b906e))
+
+
+### Bug Fixes
+
+* enable self signed jwt for grpc ([#26](https://www.github.com/googleapis/python-private-catalog/issues/26)) ([0ca6f17](https://www.github.com/googleapis/python-private-catalog/commit/0ca6f17bb49a51e8c368224a7c5bb56e3215e429))
+
 ### [0.2.1](https://www.github.com/googleapis/python-private-catalog/compare/v0.2.0...v0.2.1) (2021-07-21)
 
 
