@@ -1919,7 +1919,6 @@ def test_private_catalog_transport_auth_adc(transport_class):
     [
         transports.PrivateCatalogGrpcTransport,
         transports.PrivateCatalogGrpcAsyncIOTransport,
-        transports.PrivateCatalogRestTransport,
     ],
 )
 def test_private_catalog_transport_auth_gdch_credentials(transport_class):
