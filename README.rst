@@ -3,7 +3,7 @@ Python Client for Private Catalog API
 
 |preview| |pypi| |versions|
 
-`Private Catalog API`_: 
+`Private Catalog API`_: allows developers and cloud admins to make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
