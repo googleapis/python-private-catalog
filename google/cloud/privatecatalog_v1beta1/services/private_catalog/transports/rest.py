@@ -14,24 +14,21 @@
 # limitations under the License.
 #
 
-from google.auth.transport.requests import AuthorizedSession  # type: ignore
-import json  # type: ignore
-import grpc  # type: ignore
-from google.auth.transport.grpc import SslCredentials  # type: ignore
-from google.auth import credentials as ga_credentials  # type: ignore
-from google.api_core import exceptions as core_exceptions
-from google.api_core import retry as retries
-from google.api_core import rest_helpers
-from google.api_core import rest_streaming
-from google.api_core import path_template
-from google.api_core import gapic_v1
-
-from google.protobuf import json_format
-from requests import __version__ as requests_version
 import dataclasses
+import json  # type: ignore
 import re
 from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
+
+from google.api_core import gapic_v1, path_template, rest_helpers, rest_streaming
+from google.api_core import exceptions as core_exceptions
+from google.api_core import retry as retries
+from google.auth import credentials as ga_credentials  # type: ignore
+from google.auth.transport.grpc import SslCredentials  # type: ignore
+from google.auth.transport.requests import AuthorizedSession  # type: ignore
+from google.protobuf import json_format
+import grpc  # type: ignore
+from requests import __version__ as requests_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -41,8 +38,8 @@ except AttributeError:  # pragma: NO COVER
 
 from google.cloud.privatecatalog_v1beta1.types import private_catalog
 
-from .base import PrivateCatalogTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
-
+from .base import DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+from .base import PrivateCatalogTransport
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
     gapic_version=BASE_DEFAULT_CLIENT_INFO.gapic_version,
@@ -92,7 +89,12 @@ class PrivateCatalogRestInterceptor:
 
 
     """
-    def pre_search_catalogs(self, request: private_catalog.SearchCatalogsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[private_catalog.SearchCatalogsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_search_catalogs(
+        self,
+        request: private_catalog.SearchCatalogsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[private_catalog.SearchCatalogsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for search_catalogs
 
         Override in a subclass to manipulate the request or metadata
@@ -100,7 +102,9 @@ class PrivateCatalogRestInterceptor:
         """
         return request, metadata
 
-    def post_search_catalogs(self, response: private_catalog.SearchCatalogsResponse) -> private_catalog.SearchCatalogsResponse:
+    def post_search_catalogs(
+        self, response: private_catalog.SearchCatalogsResponse
+    ) -> private_catalog.SearchCatalogsResponse:
         """Post-rpc interceptor for search_catalogs
 
         Override in a subclass to manipulate the response
@@ -108,7 +112,12 @@ class PrivateCatalogRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_search_products(self, request: private_catalog.SearchProductsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[private_catalog.SearchProductsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_search_products(
+        self,
+        request: private_catalog.SearchProductsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[private_catalog.SearchProductsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for search_products
 
         Override in a subclass to manipulate the request or metadata
@@ -116,7 +125,9 @@ class PrivateCatalogRestInterceptor:
         """
         return request, metadata
 
-    def post_search_products(self, response: private_catalog.SearchProductsResponse) -> private_catalog.SearchProductsResponse:
+    def post_search_products(
+        self, response: private_catalog.SearchProductsResponse
+    ) -> private_catalog.SearchProductsResponse:
         """Post-rpc interceptor for search_products
 
         Override in a subclass to manipulate the response
@@ -124,7 +135,12 @@ class PrivateCatalogRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_search_versions(self, request: private_catalog.SearchVersionsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[private_catalog.SearchVersionsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_search_versions(
+        self,
+        request: private_catalog.SearchVersionsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[private_catalog.SearchVersionsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for search_versions
 
         Override in a subclass to manipulate the request or metadata
@@ -132,7 +148,9 @@ class PrivateCatalogRestInterceptor:
         """
         return request, metadata
 
-    def post_search_versions(self, response: private_catalog.SearchVersionsResponse) -> private_catalog.SearchVersionsResponse:
+    def post_search_versions(
+        self, response: private_catalog.SearchVersionsResponse
+    ) -> private_catalog.SearchVersionsResponse:
         """Post-rpc interceptor for search_versions
 
         Override in a subclass to manipulate the response
@@ -186,55 +204,56 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
     library's source repository. Thank you!
     """
 
-    def __init__(self, *,
-            host: str = 'cloudprivatecatalog.googleapis.com',
-            credentials: ga_credentials.Credentials=None,
-            credentials_file: str=None,
-            scopes: Sequence[str]=None,
-            client_cert_source_for_mtls: Callable[[
-                ], Tuple[bytes, bytes]]=None,
-            quota_project_id: Optional[str]=None,
-            client_info: gapic_v1.client_info.ClientInfo=DEFAULT_CLIENT_INFO,
-            always_use_jwt_access: Optional[bool]=False,
-            url_scheme: str='https',
-            interceptor: Optional[PrivateCatalogRestInterceptor] = None,
-            api_audience: Optional[str] = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "cloudprivatecatalog.googleapis.com",
+        credentials: ga_credentials.Credentials = None,
+        credentials_file: str = None,
+        scopes: Sequence[str] = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
+        interceptor: Optional[PrivateCatalogRestInterceptor] = None,
+        api_audience: Optional[str] = None,
+    ) -> None:
         """Instantiate the transport.
 
-       NOTE: This REST transport functionality is currently in a beta
-       state (preview). We welcome your feedback via a GitHub issue in
-       this library's repository. Thank you!
+        NOTE: This REST transport functionality is currently in a beta
+        state (preview). We welcome your feedback via a GitHub issue in
+        this library's repository. Thank you!
 
-        Args:
-            host (Optional[str]):
-                 The hostname to connect to.
-            credentials (Optional[google.auth.credentials.Credentials]): The
-                authorization credentials to attach to requests. These
-                credentials identify the application to the service; if none
-                are specified, the client will attempt to ascertain the
-                credentials from the environment.
+         Args:
+             host (Optional[str]):
+                  The hostname to connect to.
+             credentials (Optional[google.auth.credentials.Credentials]): The
+                 authorization credentials to attach to requests. These
+                 credentials identify the application to the service; if none
+                 are specified, the client will attempt to ascertain the
+                 credentials from the environment.
 
-            credentials_file (Optional[str]): A file with credentials that can
-                be loaded with :func:`google.auth.load_credentials_from_file`.
-                This argument is ignored if ``channel`` is provided.
-            scopes (Optional(Sequence[str])): A list of scopes. This argument is
-                ignored if ``channel`` is provided.
-            client_cert_source_for_mtls (Callable[[], Tuple[bytes, bytes]]): Client
-                certificate to configure mutual TLS HTTP channel. It is ignored
-                if ``channel`` is provided.
-            quota_project_id (Optional[str]): An optional project to use for billing
-                and quota.
-            client_info (google.api_core.gapic_v1.client_info.ClientInfo):
-                The client info used to send a user-agent string along with
-                API requests. If ``None``, then default info will be used.
-                Generally, you only need to set this if you are developing
-                your own client library.
-            always_use_jwt_access (Optional[bool]): Whether self signed JWT should
-                be used for service account credentials.
-            url_scheme: the protocol scheme for the API endpoint.  Normally
-                "https", but for testing or local servers,
-                "http" can be specified.
+             credentials_file (Optional[str]): A file with credentials that can
+                 be loaded with :func:`google.auth.load_credentials_from_file`.
+                 This argument is ignored if ``channel`` is provided.
+             scopes (Optional(Sequence[str])): A list of scopes. This argument is
+                 ignored if ``channel`` is provided.
+             client_cert_source_for_mtls (Callable[[], Tuple[bytes, bytes]]): Client
+                 certificate to configure mutual TLS HTTP channel. It is ignored
+                 if ``channel`` is provided.
+             quota_project_id (Optional[str]): An optional project to use for billing
+                 and quota.
+             client_info (google.api_core.gapic_v1.client_info.ClientInfo):
+                 The client info used to send a user-agent string along with
+                 API requests. If ``None``, then default info will be used.
+                 Generally, you only need to set this if you are developing
+                 your own client library.
+             always_use_jwt_access (Optional[bool]): Whether self signed JWT should
+                 be used for service account credentials.
+             url_scheme: the protocol scheme for the API endpoint.  Normally
+                 "https", but for testing or local servers,
+                 "http" can be specified.
         """
         # Run the base constructor
         # TODO(yon-mg): resolve other ctor params i.e. scopes, quota, etc.
@@ -242,7 +261,9 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
         # credentials object
         maybe_url_match = re.match("^(?P<scheme>http(?:s)?://)?(?P<host>.*)$", host)
         if maybe_url_match is None:
-            raise ValueError(f"Unexpected hostname structure: {host}")  # pragma: NO COVER
+            raise ValueError(
+                f"Unexpected hostname structure: {host}"
+            )  # pragma: NO COVER
 
         url_match_items = maybe_url_match.groupdict()
 
@@ -253,10 +274,11 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
             credentials=credentials,
             client_info=client_info,
             always_use_jwt_access=always_use_jwt_access,
-            api_audience=api_audience
+            api_audience=api_audience,
         )
         self._session = AuthorizedSession(
-            self._credentials, default_host=self.DEFAULT_HOST)
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
         if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
         self._interceptor = interceptor or PrivateCatalogRestInterceptor()
@@ -266,19 +288,24 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
         def __hash__(self):
             return hash("SearchCatalogs")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: private_catalog.SearchCatalogsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: float=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> private_catalog.SearchCatalogsResponse:
+        def __call__(
+            self,
+            request: private_catalog.SearchCatalogsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> private_catalog.SearchCatalogsResponse:
             r"""Call the search catalogs method over HTTP.
 
             Args:
@@ -299,43 +326,46 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=projects/*}/catalogs:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=organizations/*}/catalogs:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=folders/*}/catalogs:search',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=projects/*}/catalogs:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=organizations/*}/catalogs:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=folders/*}/catalogs:search",
+                },
             ]
             request, metadata = self._interceptor.pre_search_catalogs(request, metadata)
             pb_request = private_catalog.SearchCatalogsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=False,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=False,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -354,19 +384,24 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
         def __hash__(self):
             return hash("SearchProducts")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: private_catalog.SearchProductsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: float=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> private_catalog.SearchProductsResponse:
+        def __call__(
+            self,
+            request: private_catalog.SearchProductsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> private_catalog.SearchProductsResponse:
             r"""Call the search products method over HTTP.
 
             Args:
@@ -387,43 +422,46 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=projects/*}/products:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=organizations/*}/products:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=folders/*}/products:search',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=projects/*}/products:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=organizations/*}/products:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=folders/*}/products:search",
+                },
             ]
             request, metadata = self._interceptor.pre_search_products(request, metadata)
             pb_request = private_catalog.SearchProductsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=False,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=False,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -442,19 +480,26 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
         def __hash__(self):
             return hash("SearchVersions")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] =  {
-            "query" : "",        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, str] = {
+            "query": "",
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: private_catalog.SearchVersionsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: float=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> private_catalog.SearchVersionsResponse:
+        def __call__(
+            self,
+            request: private_catalog.SearchVersionsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: float = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> private_catalog.SearchVersionsResponse:
             r"""Call the search versions method over HTTP.
 
             Args:
@@ -475,43 +520,46 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=projects/*}/versions:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=organizations/*}/versions:search',
-            },
-{
-                'method': 'get',
-                'uri': '/v1beta1/{resource=folders/*}/versions:search',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=projects/*}/versions:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=organizations/*}/versions:search",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1beta1/{resource=folders/*}/versions:search",
+                },
             ]
             request, metadata = self._interceptor.pre_search_versions(request, metadata)
             pb_request = private_catalog.SearchVersionsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=False,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=False,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -527,28 +575,34 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
             return resp
 
     @property
-    def search_catalogs(self) -> Callable[
-            [private_catalog.SearchCatalogsRequest],
-            private_catalog.SearchCatalogsResponse]:
+    def search_catalogs(
+        self,
+    ) -> Callable[
+        [private_catalog.SearchCatalogsRequest], private_catalog.SearchCatalogsResponse
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._SearchCatalogs(self._session, self._host, self._interceptor) # type: ignore
+        return self._SearchCatalogs(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def search_products(self) -> Callable[
-            [private_catalog.SearchProductsRequest],
-            private_catalog.SearchProductsResponse]:
+    def search_products(
+        self,
+    ) -> Callable[
+        [private_catalog.SearchProductsRequest], private_catalog.SearchProductsResponse
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._SearchProducts(self._session, self._host, self._interceptor) # type: ignore
+        return self._SearchProducts(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def search_versions(self) -> Callable[
-            [private_catalog.SearchVersionsRequest],
-            private_catalog.SearchVersionsResponse]:
+    def search_versions(
+        self,
+    ) -> Callable[
+        [private_catalog.SearchVersionsRequest], private_catalog.SearchVersionsResponse
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._SearchVersions(self._session, self._host, self._interceptor) # type: ignore
+        return self._SearchVersions(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
     def kind(self) -> str:
@@ -558,6 +612,4 @@ class PrivateCatalogRestTransport(PrivateCatalogTransport):
         self._session.close()
 
 
-__all__=(
-    'PrivateCatalogRestTransport',
-)
+__all__ = ("PrivateCatalogRestTransport",)
